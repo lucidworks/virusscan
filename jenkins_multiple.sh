@@ -3,10 +3,12 @@ set -e
 
 folder=$1
 
+#Gets the contains of the downloaded files
 ls -p "$folder" | grep -v / > ls-files.txt
 
 test -e data && rm -fr data
 
+#Creating folders for extracting the data
 mkdir -p data
 mkdir -p data/zip
 mkdir -p data/tar
@@ -28,8 +30,11 @@ while read -r filename; do
   esac
 done < ls-files.txt
 
+#Executes the scan
 bash -x build-run-scan.sh
 status=$?
+
+#Removes the extracted files
 rm -fr data
 
 exit $status
