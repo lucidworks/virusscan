@@ -6,16 +6,19 @@ folder=$1
 ls -p "$folder" | grep -v / > ls-files.txt
 
 test -e data && rm -fr data
+
 mkdir -p data
+mkdir -p data/zip
+mkdir -p data/tar
 
 #Reads all the file names and extract the contents
 while read -r filename; do
   case "$filename" in
   *.tar.gz):
-  	tar --directory data --extract --file "$folder/$filename"
+  	tar --directory data/tar --extract --file "$folder/$filename"
     ;;
   *.zip)
-    unzip "$folder/$filename" -d data
+    unzip "$folder/$filename" -d data/zip
     ;;
   *)
     mv "$folder/$filename" data/
