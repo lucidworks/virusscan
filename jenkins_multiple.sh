@@ -1,21 +1,6 @@
 #!/bin/bash
 set -e
 
-Version=$1
-
-if [[ -z "${Version:-}" ]]; then
-  echo "Missing environment variable 'Version'"
-  exit 1
-fi
-
-if ! grep -P '^\d+\.\d+\.\d+$' <<<$Version; then
-  echo "Version=$Version does not look like a Major.Minor.Patch version"
-  exit 1
-fi
-
-S3_PREFIX="download.lucidworks.com/fusion-$Version/"
-aws s3 sync $S3_PREFIX .
-
 ls -p | grep -v / > ls-files.txt
 
 test -e data && rm -fr data
