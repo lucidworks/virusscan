@@ -15,9 +15,11 @@ mkdir -p data/tar
 while read -r filename; do
   case "$filename" in
   *.tar.gz):
+    mkdir "data/tar/$filename"
   	tar --directory data/tar --extract --file "$folder/$filename"
     ;;
   *.zip)
+    mkdir "data/zip/$filename"
     unzip "$folder/$filename" -d data/zip
     ;;
   *)
