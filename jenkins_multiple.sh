@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+Version=$1
+
 if [[ -z "${Version:-}" ]]; then
   echo "Missing environment variable 'Version'"
   exit 1
