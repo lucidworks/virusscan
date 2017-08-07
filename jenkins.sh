@@ -9,7 +9,7 @@ test -e data && rm -fr data
 mkdir -p data
 curl -O -s "$file_url"
 filename=$(sed -e 's,^.*/,,' <<<$file_url)
-sha256sum $filename|tee file.sha256
+sha256sum "$filename"|tee file.sha256
 case "$filename" in
   *.tar.gz):
   	tar --directory data --extract --file "$filename"

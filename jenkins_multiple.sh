@@ -3,17 +3,17 @@ set -e
 
 folder=$1
 
-#Gets the contains of the downloaded files
-ls -p "$folder" | grep -v / > ls-files.txt
+# Gets the contents of the downloaded files
+find "$folder" -mindepth 1 -maxdepth 1 -type f > files.txt
 
 test -e data && rm -fr data
 
-#Creating folders for extracting the data
+# Creating folders for extracting the data
 mkdir -p data
 mkdir -p data/zip
 mkdir -p data/tar
 
-#Reads all the file names and extract the contents
+# Reads all the file names and extract the contents
 while read -r filename; do
   case "$filename" in
   *.tar.gz):
@@ -28,13 +28,13 @@ while read -r filename; do
     mv "$folder/$filename" data/
     ;;
   esac
-done < ls-files.txt
+done < files.txt
 
-#Executes the scan
+# Executes the scan
 bash -x build-run-scan.sh
 status=$?
 
-#Removes the extracted files
+# Removes the extracted files
 rm -fr data
 
 exit $status
