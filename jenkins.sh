@@ -56,14 +56,14 @@ else
   fi
 
   #S3 artifacts will be downloaded in this folder
-  FOLDER="from_s3"
+  folder="from_s3"
 
   # Creates the folder for the s3 artifacts
-  mkdir "$FOLDER"
+  mkdir "$folder"
 
   # Syncs the s3 folder with the local folder
   S3_PREFIX="s3://download.lucidworks.com/fusion-$Version/"
-  aws s3 sync $S3_PREFIX "$FOLDER"
+  aws s3 sync $S3_PREFIX "$folder"
 
   # Gets the contents of the downloaded files
   find "$folder" -mindepth 1 -maxdepth 1 -type f -printf '%f\n' > files.txt
@@ -100,7 +100,7 @@ else
   rm -fr data
 
   #Removes the s3 folder
-  rm -rf "$FOLDER"
+  rm -rf "$folder"
 
 fi
 
