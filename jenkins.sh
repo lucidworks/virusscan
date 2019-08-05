@@ -5,7 +5,7 @@ set -e
 if ! grep -P '^\d+\.\d+\.\d+$' <<<"$1"; then
 
   #Regex for checking the file link
-  regex='(https?|ftp|file|s3)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'
+  regex='(https?|ftp|file|s3)://[-A-Za-z0-9\+&@#/%?-=~_|!:,.;]*[-A-Za-z0-9\+&@#/%-=~_|]'
   file_url=$1
 
   #if the link is valid
